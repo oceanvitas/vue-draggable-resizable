@@ -376,7 +376,35 @@ export default {
       if (val >= 0 || val === 'auto') {
         this.zIndex = val
       }
-    }
+    },
+    x: function (val) {
+      if ((this.elmX + val >= this.parentX) && (val + this.elmW <= this.parentW)) {
+        this.left = (Math.round(val / this.grid[0]) * this.grid[0])
+      }
+
+      this.$emit('resizing', this.left, this.top, this.width, this.height)
+    },
+    y: function (val) {
+      if ((this.elmY + val >= this.parentY) && (val + this.elmH <= this.parentH)) {
+        this.top = (Math.round(val / this.grid[1]) * this.grid[1])
+      }
+
+      this.$emit('resizing', this.left, this.top, this.width, this.height)
+    },
+    w: function (val) {
+      if (val > 0 && this.elmX + val <= this.parentW) {
+        this.width = (Math.round(val / this.grid[0]) * this.grid[0])
+      }
+
+      this.$emit('resizing', this.left, this.top, this.width, this.height)
+    },
+    h: function (val) {
+      if (val > 0 && this.elmY + val <= this.parentH) {
+        this.height = (Math.round(val / this.grid[1]) * this.grid[1])
+      }
+
+      this.$emit('resizing', this.left, this.top, this.width, this.height)
+    },
   }
 }
 </script>
